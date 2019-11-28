@@ -13,6 +13,7 @@ public class Music extends Thread{
 	private File file;
 	private FileInputStream fis;
 	private BufferedInputStream bis;
+	private int test = 10;
 	
 	public Music(String name, boolean isLoop) {
 		try {
