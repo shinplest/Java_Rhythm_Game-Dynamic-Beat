@@ -1,7 +1,7 @@
 # Java_Rhythm_Game-Dynamic-Beat
 Make a simple Java Rhythm game with JFrame
 
-<img src="./READMESRC/sample.png">
+<img src="./READMESRC/sample.PNG">
 
 # License
 ```
