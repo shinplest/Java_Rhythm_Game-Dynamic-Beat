@@ -47,6 +47,10 @@ public class DynamicBeat extends JFrame {
 	private ImageIcon hardButtonBasicImage = new ImageIcon(Main.class.getResource("../images/hard_button.png"));
 	private ImageIcon hardButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/hard_buttonSelected.png"));
 	
+	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/back_button.png"));
+	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/back_buttonSelected.png"));
+
+	
 	private JButton quitButton = new JButton(quitButtonBasicImage);
 	private JButton startButton = new JButton(startButtonBasicImage);
 	private JButton exitButton = new JButton(exitButtonBasicImage);
@@ -57,6 +61,9 @@ public class DynamicBeat extends JFrame {
 	
 	private JButton easyButton = new JButton(easyButtonBasicImage);
 	private JButton hardButton = new JButton(hardButtonBasicImage);
+	
+	private JButton backButton = new JButton(backButtonBasicImage);
+	
 
 	private int mouseX, mouseY;
 
@@ -67,11 +74,11 @@ public class DynamicBeat extends JFrame {
 	private Image selectedImage;
 	private Image titleImage;
 	private Music selectedMusic;
+	private Music introMusic = new Music("intro_music.mp3", true);
 	private int nowSelected = 0;
 
 	public DynamicBeat() {
 
-		Music introMusic = new Music("intro_music.mp3", true);
 		introMusic.start();
 
 		trackList.add(new Track("avengers_title.png", "avengers.png", "avengers_play.png", "The avengers Selected.mp3",
@@ -142,19 +149,8 @@ public class DynamicBeat extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Music buttonEnteredMusic = new Music("buttonEntered.mp3", false);
-				buttonEnteredMusic.start();
-				introMusic.close();
-				selectTrack(0);
-				startButton.setVisible(false);
-				exitButton.setVisible(false);
-				background = new ImageIcon(Main.class.getResource("../images/intro_background(title).jpg")).getImage();
-				leftButton.setVisible(true);
-				rightButton.setVisible(true);
-				//playButton.setVisible(true);
-				
-				easyButton.setVisible(true);
-				hardButton.setVisible(true);
-				isMainScreen = true;
+				buttonEnteredMusic.start();		
+				entermain();
 			}
 		});
 		add(startButton);
@@ -306,6 +302,34 @@ public class DynamicBeat extends JFrame {
 		});
 		add(hardButton);
 		
+		backButton.setVisible(false);
+		backButton.setBounds(20, 50, 60, 60);
+		backButton.setBorderPainted(false);
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				backButton.setIcon(backButtonEnteredImage);
+				backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				Music buttonEnteredMusic = new Music("buttonEntered.mp3", false);
+				buttonEnteredMusic.start();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				backButton.setIcon(backButtonBasicImage);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Music buttonEnteredMusic = new Music("buttonEntered.mp3", false);
+				buttonEnteredMusic.start();
+				backMain();
+			}
+		});
+		add(backButton);
+		
 		
 		// 플레이버튼
 		playButton.setVisible(false);
@@ -410,6 +434,33 @@ public class DynamicBeat extends JFrame {
 		easyButton.setVisible(false);
 		hardButton.setVisible(false);
 		background = new ImageIcon(Main.class.getResource("../images/"+ trackList.get(nowSelected).getgameImage())).getImage();
+		backButton.setVisible(true);
+	}
+	
+	public void backMain() {
+		isMainScreen = true;
+		leftButton.setVisible(true);
+		rightButton.setVisible(true);
+		easyButton.setVisible(true);
+		hardButton.setVisible(true);
+		background = new ImageIcon(Main.class.getResource("../images/intro_background(title).jpg")).getImage();
+		backButton.setVisible(false);
+		selectTrack(nowSelected);
+	}
+	
+	public void entermain() {
+		startButton.setVisible(false);
+		exitButton.setVisible(false);
+		background = new ImageIcon(Main.class.getResource("../images/intro_background(title).jpg")).getImage();
+		isMainScreen = true;
+
+		leftButton.setVisible(true);
+		rightButton.setVisible(true);
+		//playButton.setVisible(true);
+		easyButton.setVisible(true);
+		hardButton.setVisible(true);
+		introMusic.close();
+		selectTrack(0);
 	}
 
 }
