@@ -4,7 +4,7 @@ public class Track {
 	
 	private String titleImage;
 	private String startImage;
-	private String gameImgae;
+	private String gameImage;
 	private String startMusic;
 	private String gameMusic;
 	
@@ -20,11 +20,11 @@ public class Track {
 	public void setStartImage(String startImage) {
 		this.startImage = startImage;
 	}
-	public String getGameImgae() {
-		return gameImgae;
+	public String getgameImage() {
+		return gameImage;
 	}
-	public void setGameImgae(String gameImgae) {
-		this.gameImgae = gameImgae;
+	public void setgameImage(String gameImage) {
+		this.gameImage = gameImage;
 	}
 	public String getStartMusic() {
 		return startMusic;
@@ -38,11 +38,11 @@ public class Track {
 	public void setGameMusic(String gameMusic) {
 		this.gameMusic = gameMusic;
 	}
-	public Track(String titleImage, String startImage, String gameImgae, String startMusic, String gameMusic) {
+	public Track(String titleImage, String startImage, String gameImage, String startMusic, String gameMusic) {
 		super();
 		this.titleImage = titleImage;
 		this.startImage = startImage;
-		this.gameImgae = gameImgae;
+		this.gameImage = gameImage;
 		this.startMusic = startMusic;
 		this.gameMusic = gameMusic;
 	}
