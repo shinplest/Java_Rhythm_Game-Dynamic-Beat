@@ -70,7 +70,7 @@ public class DynamicBeat extends JFrame {
 	private Music introMusic = new Music("intro_music.mp3", true);
 	private int nowSelected = 0;
 	
-	public static Game game = new Game();
+	public static Game game;
 	
 
 	public DynamicBeat() {
@@ -78,9 +78,9 @@ public class DynamicBeat extends JFrame {
 		introMusic.start();
 
 		trackList.add(new Track("avengers_title.png", "avengers.png", "avengers_play.png", "The avengers Selected.mp3",
-				"Approaching Nirvana - The Avengers Theme Remix.mp3"));
+				"Approaching Nirvana - The Avengers Theme Remix.mp3", "The Avengers Theme Remix"));
 		trackList.add(
-				new Track("lunar_title.png", "ironman.png", "ironman_play.jpg", "Lunar Selected.mp3", "Lunar.mp3"));
+				new Track("lunar_title.png", "ironman.png", "ironman_play.jpg", "Lunar Selected.mp3", "Lunar.mp3", "Lunar"));
 
 		setUndecorated(true);
 		setTitle("Dynamic Beat");
@@ -267,7 +267,7 @@ public class DynamicBeat extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				Music buttonEnteredMusic = new Music("buttonEntered.mp3", false);
 				buttonEnteredMusic.start();
-				gameStart(nowSelected, "easy");
+				gameStart(nowSelected, "Easy");
 			}
 		});
 		add(easyButton);
@@ -295,7 +295,7 @@ public class DynamicBeat extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				Music buttonEnteredMusic = new Music("buttonEntered.mp3", false);
 				buttonEnteredMusic.start();
-				gameStart(nowSelected, "hard");
+				gameStart(nowSelected, "Hard");
 			}
 		});
 		add(hardButton);
@@ -438,6 +438,7 @@ public class DynamicBeat extends JFrame {
 		backButton.setVisible(true);
 		isGameScreen = true;
 		setFocusable(true);
+		game = new Game(trackList.get(nowSelected).getTitleName(), difficulty, trackList.get(nowSelected).getGameMusic());
 	}
 
 	public void backMain() {
@@ -450,6 +451,7 @@ public class DynamicBeat extends JFrame {
 		backButton.setVisible(false);
 		selectTrack(nowSelected);
 		isGameScreen = false;
+		game.close();
 	}
 
 	public void entermain() {
