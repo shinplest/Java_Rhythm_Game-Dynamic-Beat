@@ -1,3 +1,10 @@
+//단축키 
+
+//control + shift + f 코드 자동 정렬
+//control + shift + o 자동 import
+
+
+
 package dynamic_beat;
 
 public class Main {
