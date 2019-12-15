@@ -464,7 +464,7 @@ public class DynamicBeat extends JFrame {
 		rightButton.setVisible(true);
 		// playButton.setVisible(true);
 		easyButton.setVisible(true);
-		hardButton.setVisible(true);
+		hardButton.setVisible(true); 
 		introMusic.close();
 		selectTrack(0);
 	}
