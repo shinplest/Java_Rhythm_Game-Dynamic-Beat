@@ -36,8 +36,6 @@ public class Game extends Thread {
 		this.difficulty = difficulty;
 		this.musicTitle = musicTitle;
 		gameMusic = new Music(this.musicTitle, false);
-		gameMusic.start();
-		dropNotes(titleName);
 	}
 
 	public void screenDraw(Graphics2D g) {
@@ -74,7 +72,7 @@ public class Game extends Thread {
 		g.drawString("S", 270, 609);
 		g.drawString("D", 374, 609);
 		g.drawString("F", 478, 609);
-		g.drawString("SPACE BAR", 580, 609);
+		g.drawString("SPACE BAR", 565, 609);
 		g.drawString("J", 784, 609);
 		g.drawString("K", 889, 609);
 		g.drawString("L", 993, 609);
@@ -149,7 +147,7 @@ public class Game extends Thread {
 
 	@Override
 	public void run() {
-
+		dropNotes();
 	}
 
 	public void close() {
@@ -157,10 +155,38 @@ public class Game extends Thread {
 		this.interrupt();
 	}
 
-	public void dropNotes(String titleName) {
-		Note note = new Note(228, "short");
-		note.start();
-		noteList.add(note);
+	public void dropNotes() {
+		Beat[] beats = null;
+		if(titleName.equals("The Avengers Theme Remix")) {
+			int startTime = 1000 - Main.REACH_TIME * 1000;
+			beats = new Beat[] {
+					new Beat(startTime, "Space")
+			};
+		}
+		else if(titleName.equals("Lunar")) {
+			int startTime = 1000 - Main.REACH_TIME * 1000;
+			beats = new Beat[] {
+					new Beat(startTime, "Space")
+			};
+		}
+		int i = 0;
+		gameMusic.start();
+		while(i < beats.length && !isInterrupted()) {
+			boolean dropped = false;
+			if(beats[i].getTime() <= gameMusic.getTime()) {
+				Note note = new Note(beats[i].getNoteName());
+				note.start();
+				noteList.add(note);
+				i++;
+				dropped = true;
+			}
+//			if(!dropped) {
+//				try {
+//					Thread.sleep(5);
+//				} catch(Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+		}
 	}
-
 }

@@ -74,13 +74,12 @@ public class DynamicBeat extends JFrame {
 	
 
 	public DynamicBeat() {
-
-		introMusic.start();
-
 		trackList.add(new Track("avengers_title.png", "avengers.png", "avengers_play.png", "The avengers Selected.mp3",
 				"Approaching Nirvana - The Avengers Theme Remix.mp3", "The Avengers Theme Remix"));
 		trackList.add(
 				new Track("lunar_title.png", "ironman.png", "ironman_play.jpg", "Lunar Selected.mp3", "Lunar.mp3", "Lunar"));
+		
+		introMusic.start();
 
 		setUndecorated(true);
 		setTitle("Dynamic Beat");
@@ -394,6 +393,11 @@ public class DynamicBeat extends JFrame {
 			game.screenDraw(g);
 		}
 		paintComponents(g);
+		try {
+			Thread.sleep(5);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		this.repaint();
 	}
 
@@ -437,8 +441,9 @@ public class DynamicBeat extends JFrame {
 				.getImage();
 		backButton.setVisible(true);
 		isGameScreen = true;
-		setFocusable(true);
 		game = new Game(trackList.get(nowSelected).getTitleName(), difficulty, trackList.get(nowSelected).getGameMusic());
+		game.start();
+		setFocusable(true);
 	}
 
 	public void backMain() {

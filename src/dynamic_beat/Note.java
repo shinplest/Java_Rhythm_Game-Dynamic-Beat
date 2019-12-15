@@ -8,30 +8,48 @@ import javax.swing.ImageIcon;
 public class Note extends Thread {
 
 	private Image noteBasicImage = new ImageIcon(Main.class.getResource("../images/noteBasic.png")).getImage();
-	private int x, y = 580 - 1000 / Main.SLEEP_TIME * Main.NOTE_SPEED;
+	private int x, y = 580 - (1000 / Main.SLEEP_TIME * Main.NOTE_SPEED) * Main.REACH_TIME;
 	private String noteType;
 
-	public Note(int x, String noteType) {
-		this.x = x;
+	public Note(String noteType) {
+		if(noteType.equals("S")) {
+			x = 228;
+		}
+		if(noteType.equals("D")) {
+			x = 332;
+		}
+		if(noteType.equals("F")) {
+			x = 436;
+		}
+		if(noteType.equals("Space")) {
+			x = 540;
+		}
+		if(noteType.equals("J")) {
+			x = 744;
+		}
+		if(noteType.equals("K")) {
+			x = 848;
+		}
+		if(noteType.equals("L")) {
+			x = 952;
+		}
 		this.noteType = noteType;
 	}
 
 	public void screenDraw(Graphics2D g) {
-		if(noteType.contentEquals("short"))
-		{
+		if (!noteType.contentEquals("Space")) {
 			g.drawImage(noteBasicImage, x, y, null);
-		}
-		else if(noteType.equals("long"))
-		{
+		} else {
 			g.drawImage(noteBasicImage, x, y, null);
 			g.drawImage(noteBasicImage, x + 100, y, null);
 		}
 	}
-	
+
 	public void drop() {
 		y += Main.NOTE_SPEED;
-		
+
 	}
+
 	@Override
 	public void run() {
 		try {
@@ -39,7 +57,7 @@ public class Note extends Thread {
 				drop();
 				Thread.sleep(Main.SLEEP_TIME);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
