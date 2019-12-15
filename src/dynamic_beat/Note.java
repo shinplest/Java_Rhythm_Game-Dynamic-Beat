@@ -47,7 +47,6 @@ public class Note extends Thread {
 
 	public void drop() {
 		y += Main.NOTE_SPEED;
-
 	}
 
 	@Override

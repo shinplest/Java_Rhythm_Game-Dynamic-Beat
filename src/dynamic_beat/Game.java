@@ -157,16 +157,21 @@ public class Game extends Thread {
 
 	public void dropNotes() {
 		Beat[] beats = null;
+		int gap = 500;
 		if(titleName.equals("The Avengers Theme Remix")) {
 			int startTime = 1000 - Main.REACH_TIME * 1000;
 			beats = new Beat[] {
-					new Beat(startTime, "Space")
+					new Beat(startTime, "Space"),
+					new Beat(startTime + gap, "D"),
+					new Beat(startTime + gap * 3, "J")
 			};
 		}
 		else if(titleName.equals("Lunar")) {
 			int startTime = 1000 - Main.REACH_TIME * 1000;
 			beats = new Beat[] {
-					new Beat(startTime, "Space")
+					new Beat(startTime, "Space"),
+					new Beat(startTime + gap, "D"),
+					new Beat(startTime + gap * 3, "J")
 			};
 		}
 		int i = 0;
@@ -180,13 +185,13 @@ public class Game extends Thread {
 				i++;
 				dropped = true;
 			}
-//			if(!dropped) {
-//				try {
-//					Thread.sleep(5);
-//				} catch(Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
+			if(!dropped) {
+				try {
+					Thread.sleep(5);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }
